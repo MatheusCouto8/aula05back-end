@@ -20,10 +20,13 @@ let emocoes = [
     },
 ]
 
+//rota pra buscar todas emoções
 emocoesRoutes.get("/", (req, res) => {
     return res .status(200).send(emocoes);
 });
-emocoesRoutes.post("/emocoes", (req, res) => {
+
+//rota para criar nova emoção
+emocoesRoutes.post("/", (req, res) => {
     const { nome, cor } = req.body;
     const novaEmocao = {
         id: emocoes.length + 1,
@@ -32,7 +35,26 @@ emocoesRoutes.post("/emocoes", (req, res) => {
     }
 
     emocoes.push(novaEmocao)
-    return res .status(201).send(novaEmocao);
+    return res.status(201).send(novaEmocao);
+});
+
+emocoesRoutes.get ("/:id", (req, res) => {
+    const {id} = req.params;
+
+    //console.log(id);
+
+    const emocao = emocoes.find((emotion) => emotion.id == id)
+
+    if(!emocao) {
+        return res.status(404).send({
+            message: "Emoção não encontrada!"
+        })
+    }
+return res.status(200).send({
+    message: "Emoção encontrada!"
+});
+
+    
 });
 
 export default emocoesRoutes
