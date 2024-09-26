@@ -15,5 +15,5 @@ app.get("/personagens", (req, res) =>{
 })
 
 app.listen(serverPort, () => {
-    console.log(`😎 server started on http://localhost:${serverPort}`)
+    console.log(`👏 server started on http://localhost:${serverPort}`)
 })
